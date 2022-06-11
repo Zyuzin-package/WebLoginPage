@@ -1,6 +1,6 @@
-package app.dao.mapper;
+package login.dao.mapper;
 
-import app.models.User;
+import login.models.User;
 
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;

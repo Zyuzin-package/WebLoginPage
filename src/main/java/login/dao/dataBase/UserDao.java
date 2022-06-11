@@ -1,7 +1,7 @@
-package app.dao.dataBase;
+package login.dao.dataBase;
 
-import app.dao.api.StorageDAO;
-import app.models.User;
+import login.dao.api.StorageDAO;
+import login.models.User;
 
 import java.util.List;
 

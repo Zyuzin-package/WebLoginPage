@@ -1,13 +1,10 @@
-package app.config;
+package login.config;
 
-import app.dao.dataBase.UserDao;
+import login.dao.dataBase.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -20,18 +17,21 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan("app")
+@ComponentScan("login")
 @EnableWebMvc
-@PropertySource("classpath:DBConfig.properties")
+
 public class SpringConfig implements WebMvcConfigurer {
-    @Value("${driverClassName}")
-    private String driverClassName;
-    @Value("${dataBaseURL}")
-    private String dataBaseURL;
-    @Value("${dataBaseUserName}")
-    private String dataBaseUserName;
-    @Value("${dataBasePassword}")
-    private String dataBasePassword;
+//    @PropertySource("classpath:DBConfig.properties")
+//    @Value("${driverClassName}")
+//    private String driverClassName;
+//    @Value("${dataBaseURL}")
+//    private String dataBaseURL;
+//    @Value("${dataBaseUserName}")
+//    private String dataBaseUserName;
+//    @Value("${dataBasePassword}")
+//    private String dataBasePassword;
+
+    //https://javascopes.com/spring-propertysources-example-dac9b8b6/
 
     private final ApplicationContext applicationContext;
 
@@ -41,7 +41,7 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public UserDao userDao(){
+    public UserDao userDao() {
         return new UserDao();
     }
 
@@ -73,16 +73,16 @@ public class SpringConfig implements WebMvcConfigurer {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        dataSource.setDriverClassName(driverClassName);
-        dataSource.setUrl(dataBaseURL);
-        dataSource.setUsername(dataBaseUserName);
-        dataSource.setPassword(dataBasePassword);
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("");
 
         return dataSource;
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate (){
+    public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
 }
